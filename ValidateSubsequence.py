@@ -1,4 +1,4 @@
-
+# Really sloppy and inneficiend O(n^2) version
 def isValidSubsequence(array, sequence):
     newSequence = []
     i = 0
@@ -32,6 +32,22 @@ def isValidSubsequence(array, sequence):
         print("sequence = " + str(sequence) + " Elements = " + str(len(sequence)))
         print("subsequence = " + str(newSequence) + " Elements = " + str(len(newSequence)))
         return False
+
+array = [5, 1, 22, 25, 6, -1, 8, 10]
+sequence = [1, 6, -1, 10]
+
+print(isValidSubsequence(array, sequence))
+
+# correct O(n) time | O(1) space version
+
+def isValidSubsequenceOn(array, sequence):
+    i = 0
+    for num in array:
+        if(i == len(sequence)):
+            break
+        if(sequence[i] == num):
+            i += 1
+    return i == len(sequence)
 
 array = [5, 1, 22, 25, 6, -1, 8, 10]
 sequence = [1, 6, -1, 10]
