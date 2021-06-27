@@ -1,17 +1,31 @@
+# O(n) time | O(k) space
+HOME_TEAM_WON = 1
+
 def tournamentWinner(competitions, results):
-    teamScores = {}
-    for i in range(len(competitions)):
-        newResult = results[i]
-        if(newResult == 0):
-            newResult = 1
-        elif(newResult == 1):
-            newResult = 0
-        teamScores[competitions[i][newResult]] = 0
-        print(teamScores)
-    return ""
+    currentBestTeam = ""
+    scores = {currentBestTeam: 0}
+
+    for idx, competition in enumerate(competitions):
+        result = results[idx]
+        homeTeam, awayTeam = competition
+
+        winningTeam = homeTeam if result == HOME_TEAM_WON else awayTeam
+
+        updateScores(winningTeam, 3, scores)
+
+        if scores[winningTeam] > scores[currentBestTeam]:
+            currentBestTeam = winningTeam
+
+    return currentBestTeam
+
+def updateScores(team, points, scores):
+    if team not in scores:
+        scores[team] = 0
+
+    scores[team] += points
+
 
 competitions = [["HTML", "C#"], ["C#", "Python"], ["Python", "HTML"]]
 results = [0,0,1]
 
-print(competitions[0][1])
-tournamentWinner(competitions, results)
+print(tournamentWinner(competitions, results))
